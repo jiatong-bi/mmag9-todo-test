@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>{{ name }}'s To-Do List</h1>
+<form method="post" action="{{ url_for('logout') }}"><button>Log out</button></form>
+<form method="post" action="{{ url_for('add') }}">
+  <input name="text" placeholder="New item" required>
+  <button>Add</button>
+</form>
+<ul>
+  {% for todo in todos %}
+  <li>
+    {{ todo.text }}
+    <form method="post" action="{{ url_for('delete', todo_id=todo.id) }}" style="display:inline">
+      <button>Remove</button>
+    </form>
+  </li>
+  {% else %}
+  <li>Nothing to do.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
